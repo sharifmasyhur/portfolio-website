@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+# Sharif Masyhur — Portfolio 2.0
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Rebuilt from Create React App to **Vite + React + TypeScript + Tailwind v4**.
 
-## Available Scripts
+## Status: Stage 1 — Foundation
 
-In the project directory, you can run:
+This checkpoint contains project scaffolding, design tokens, and UI
+primitives only. `src/App.tsx` is a temporary design-system preview page,
+not the homepage — it will be replaced in Stage 2.
 
-### `npm start`
+## Getting started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm install
+npm run dev
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> **Note:** this project was authored in a sandboxed environment without
+> network access, so `npm install` has not actually been run against it here.
+> Every config file (package.json, vite.config.ts, tsconfig*.json,
+> eslint.config.js) was hand-written against current documented APIs for
+> these exact dependency versions, but you should treat the very first
+> `npm install && npm run dev` on your machine as the real first test —
+> please flag anything that doesn't come up cleanly.
 
-### `npm test`
+## Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+src/
+  main.tsx              Entry point
+  App.tsx               STAGE 1 ONLY — design system preview (replaced in Stage 2)
+  styles/
+    tokens.css           All design tokens (Tailwind v4 @theme block)
+    index.css            Global stylesheet entry
+  components/
+    ui/                  Primitives: Container, Section, SectionHeading,
+                          Button, Tag, Divider
+public/
+  favicon.svg
+  assets/
+    signature/           Loading-animation GIF assets (see NOTES.md there)
+```
 
-### `npm run build`
+## Post-delivery fixes
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Two issues surfaced when actually running this on a real machine (this
+sandbox can't run `npm install`, so these weren't caught before delivery):
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Old CRA files (`src/App.js`, `public/index.html`, etc.) were still present
+   from the original project and conflicted with the new Vite files — fixed
+   by deleting the CRA leftovers (not a bug in the new code, but worth
+   recording since it's an easy trap when migrating in place).
+2. `vite.config.ts` was missing a `resolve.alias` for `@/*`. The same alias
+   was correctly set in `tsconfig.app.json`, but TypeScript's `paths` only
+   affects type-checking/editor resolution — Vite's dev server needs its
+   own, separate alias config to resolve `@/...` imports at runtime. Fixed,
+   plus added `@types/node` since the alias fix uses `node:url`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Key decisions made in this stage
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Vite over CRA**: CRA/`react-scripts` is unmaintained; Vite matches the
+  toolchain already used in the NAClinic project and gives a proper
+  Tailwind build instead of the previous Play-CDN setup.
+- **TypeScript**: added for maintainability or a personal-brand site meant
+  to last; low cost at this scale, consistent with the Olympiaza project.
+- **Tailwind v4** (CSS-first `@theme`, via `@tailwindcss/vite`): design
+  tokens live in one CSS file (`src/styles/tokens.css`) instead of a
+  separate `tailwind.config.js`, and Tailwind reads them directly to
+  generate utilities like `bg-paper`, `text-indigo`, etc.
+- **No dark mode** for now — the ivory/indigo/terracotta palette is treated
+  as the site's singular identity rather than something that needs a
+  parallel dark variant. Easy to add later if wanted.
+- Removed: the CRA `react-scripts` toolchain, the Tailwind Play CDN
+  `<script>` tag, the orphaned root-level `portfolio.js` draft, and the
+  unedited CRA `manifest.json`/PWA icons.
