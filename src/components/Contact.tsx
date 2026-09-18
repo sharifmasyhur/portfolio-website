@@ -3,7 +3,7 @@ import { Section, SectionHeading } from "./ui";
 import { CONTACT } from "@/data/contact";
 
 const LINKS = [
-  { label: "Email", href: `mailto:${CONTACT.email}`, Icon: Mail, external: false },
+  { label: "Email", href: `mailto:${CONTACT.email}`, Icon: Mail, external: true },
   { label: "LinkedIn", href: CONTACT.linkedin, Icon: Linkedin, external: true },
   { label: "GitHub", href: CONTACT.github, Icon: Github, external: true },
 ];
