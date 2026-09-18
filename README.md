@@ -2,11 +2,16 @@
 
 Rebuilt from Create React App to **Vite + React + TypeScript + Tailwind v4**.
 
-## Status: Stage 1 — Foundation
+## Status: Stage 5 — all sections complete (About, Selected Work, Experience,
+Education, Contact). QA pass done: no placeholder text remains, all nav
+anchors verified against real section ids, all outbound links verified
+against original source data, signature intro/session behavior confirmed
+unchanged since Stage 2, responsive behavior checked at desktop (1440px)
+and mobile (375px) via a real headless-Chromium render.
 
-This checkpoint contains project scaffolding, design tokens, and UI
-primitives only. `src/App.tsx` is a temporary design-system preview page,
-not the homepage — it will be replaced in Stage 2.
+`src/App.tsx` now renders the real homepage shell: the signature loading
+intro, the navbar, the hero, and placeholder anchors for the sections built
+in Stages 3-5 (each one clearly labeled as a placeholder, not final copy).
 
 ## Getting started
 
@@ -27,19 +32,46 @@ npm run dev
 
 ```
 src/
-  main.tsx              Entry point
-  App.tsx               STAGE 1 ONLY — design system preview (replaced in Stage 2)
-  styles/
-    tokens.css           All design tokens (Tailwind v4 @theme block)
-    index.css            Global stylesheet entry
+  main.tsx                     Entry point
+  App.tsx                      Homepage shell: intro + navbar + hero + placeholders
+  hooks/
+    usePrefersReducedMotion.ts Live-updating reduced-motion detection
+    useActiveSection.ts        IntersectionObserver-based nav active-state
+  data/
+    nav.ts                     Single source of truth for section ids/labels
   components/
-    ui/                  Primitives: Container, Section, SectionHeading,
-                          Button, Tag, Divider
+    SignatureIntro.tsx         The loading intro (see "Signature intro" below)
+    Navbar.tsx                 Sticky nav, scroll-spy active state, mobile menu
+    Hero.tsx                   Name, primary identity, one positioning sentence, CTAs
+    PlaceholderSection.tsx     STAGE 2 SCAFFOLD ONLY — replaced in Stages 3-5
+    ui/                        Primitives: Container, Section, SectionHeading,
+                                Button, Tag, Divider
+  styles/
+    tokens.css                All design tokens (Tailwind v4 @theme block)
+    index.css                 Global stylesheet entry
 public/
   favicon.svg
   assets/
-    signature/           Loading-animation GIF assets (see NOTES.md there)
+    signature/                Loading-animation assets (see NOTES.md there)
 ```
+
+## Signature intro
+
+- Plays once per browser session (`sessionStorage`), not on every reload/section
+  navigation.
+- Real playback ~1.46s, then a 300ms hold, then a 450ms fade — total ~2.2s,
+  matching the "brief personal introduction" brief.
+- Never gates the homepage: the homepage is mounted and ready underneath the
+  overlay from the very first render; the overlay's fade-out is the reveal.
+- Skippable via click or any keypress at any point during playback.
+- `prefers-reduced-motion`: shows a static final-frame image with only an
+  opacity fade, no drawing animation, live-reactive if the OS setting changes
+  mid-session.
+- Background: the GIF's original white background was mathematically
+  recomposited onto the site's ivory token (`#FAF8F4`) — not a flat color
+  swap, a proper per-pixel alpha re-blend, so anti-aliased stroke edges don't
+  fringe. Full detail and verification notes in
+  `public/assets/signature/NOTES.md`.
 
 ## Post-delivery fixes
 

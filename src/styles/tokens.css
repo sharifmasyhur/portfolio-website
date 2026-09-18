@@ -56,6 +56,14 @@
   --shadow-raised: 0 4px 16px rgba(27, 31, 42, 0.06);
 
   /* ---------- Motion ---------- */
+  /* --ease-* is a real Tailwind v4 theme namespace, so this generates a
+     usable `ease-editorial` utility class. --duration-* is NOT a utility-
+     generating namespace in v4 (transition-duration utilities come from a
+     numeric default scale instead) -- these two exist as reference/
+     documentation values only. Components use Tailwind's arbitrary-value
+     syntax directly (e.g. `duration-[250ms]`) rather than a named class
+     that wouldn't actually be generated. Keep these three numbers in sync
+     with that usage if they ever change. */
   --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
   --duration-fast: 150ms;
   --duration-base: 250ms;
