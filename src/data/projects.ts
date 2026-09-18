@@ -14,8 +14,27 @@ export interface Project {
  * depth. Do not reorder without revisiting that reasoning.
  */
 export const FEATURED_PROJECTS: Project[] = [
-  {
+ {
     index: "01",
+    category: "Undergraduate Thesis",
+    year: "2026",
+    title: "Cloud Security Assessment",
+    description:
+      "Evaluation of Cloud Service Security Using Access Management and Monitoring Approaches \u2014 a research project assessing AWS security posture using IAM, CloudTrail, CloudWatch, and Config, audited with Prowler. Presented here as academic research demonstrating cloud/security exposure, not as professional security work.",
+    tags: ["AWS IAM", "CloudTrail", "Prowler"],
+  }, 
+{
+    index: "02",
+    category: "Final Assignment Experimentation",
+    year: "2025",
+    title: "CSRF Mitigation and No API Auth Attack Simulation",
+    description:
+      "An assessment task designed to detect API vulnerabilities, specifically focusing on the lack of API authentication and Cross-Site Request Forgery (CSRF). This repository also demonstrates mitigation strategies, emphasizing the implementation of CSRF protections to prevent unauthorized actions.",
+    tags: ["PPVW", "No API Auth", "CSRF", "JavaScript"],
+    links: [{ label: "View repository", href: "https://github.com/MRifkiPratama/PPVW/tree/main" }],
+  },
+{
+    index: "03",
     category: "Group Capstone",
     year: "2025",
     title: "SmartBoxIoT",
@@ -24,8 +43,18 @@ export const FEATURED_PROJECTS: Project[] = [
     tags: ["ESP32 / C++", "Flask", "IoT", "React", "Tailwind CSS", "JavaScript", "Python"],
     links: [{ label: "View repository", href: "https://github.com/andrewkristofer/SmartBox-IoT" }],
   },
+{
+    index: "04",
+    category: "Personal Project — in progress",
+    year: "2026",
+    title: "Olympiaza",
+    description:
+      "A bodyweight and resistance-training platform inspired by ancient Greek athletic culture, originally prototyped as \u201CPalestra.\u201D Built with Next.js, TypeScript, and Tailwind CSS. The homepage and a Train module \u2014 a 71-exercise library and a deterministic, rule-based workout generator \u2014 are built. A progress-tracking system, a calculator toolkit, and an editorial Learn section are planned but not yet started.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    links: [{ label: "View repository", href: "https://github.com/sharifmasyhur/Olympiaza" }],
+  },
   {
-    index: "02",
+    index: "05",
     category: "Professional / Client Work",
     year: "2026",
     title: "NAClinic",
@@ -37,27 +66,8 @@ export const FEATURED_PROJECTS: Project[] = [
       { label: "Visit site", href: "https://na-clinic.vercel.app" },
     ],
   },
-  {
-    index: "03",
-    category: "Personal Project — in progress",
-    year: "2026",
-    title: "Olympiaza",
-    description:
-      "A bodyweight and resistance-training platform inspired by ancient Greek athletic culture, originally prototyped as \u201CPalestra.\u201D Built with Next.js, TypeScript, and Tailwind CSS. The homepage and a Train module \u2014 a 71-exercise library and a deterministic, rule-based workout generator \u2014 are built. A progress-tracking system, a calculator toolkit, and an editorial Learn section are planned but not yet started.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    links: [{ label: "View repository", href: "https://github.com/sharifmasyhur/Olympiaza" }],
-  },
-  {
-    index: "04",
-    category: "Undergraduate Thesis",
-    year: "2026",
-    title: "Cloud Security Assessment",
-    description:
-      "Evaluation of Cloud Service Security Using Access Management and Monitoring Approaches \u2014 a research project assessing AWS security posture using IAM, CloudTrail, CloudWatch, and Config, audited with Prowler. Presented here as academic research demonstrating cloud/security exposure, not as professional security work.",
-    tags: ["AWS IAM", "CloudTrail", "Prowler"],
-  },
-  {
-    index: "05",
+    {
+    index: "06",
     category: "Group Project",
     year: "2024",
     title: "QuickCanteen",
